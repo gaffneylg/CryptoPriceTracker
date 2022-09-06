@@ -1,4 +1,9 @@
-# Poeticoins
+# CryptoPriceTracker
+
+Simple Liveview project to display realtime crypto coins trading price from multiple different sources. Can be extended for any trading platform using their websocket info and adding in the coin/currency pairing to the clients.
+
+Initially started from a poeticoins course and building on from there with some differences along the way.
+
 
 To start your Phoenix server:
 
