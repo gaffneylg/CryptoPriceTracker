@@ -1,18 +1,12 @@
 defmodule Poeticoins.Exchanges.CoinbaseClient do
   alias Poeticoins.{Product, Trade}
   alias Poeticoins.Exchanges.Client
-  import Client, only: [validate_required: 2]
+  require Client
 
-  @behaviour Client
-
-  @impl true
-  def exchange_name, do: "Coinbase"
-
-  @impl true
-  def server_host, do: 'ws-feed.pro.coinbase.com'
-
-  @impl true
-  def server_port, do: 443
+  Client.defclient exchange_name: "Coinbase",
+                   host: 'ws-feed.pro.coinbase.com',
+                   port: 443,
+                   currency_pairs: ["BTC-EUR", "ETH-EUR", "BTC-USD", "ETC-USD"]
 
   @impl true
   def handle_ws_message(%{"type" => "ticker"}=msg, state) do

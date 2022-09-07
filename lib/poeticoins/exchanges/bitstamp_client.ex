@@ -1,18 +1,12 @@
 defmodule Poeticoins.Exchanges.BitstampClient do
   alias Poeticoins.{Product, Trade}
   alias Poeticoins.Exchanges.Client
-  import Client, only: [validate_required: 2]
+  require Client
 
-  @behaviour Client
-
-  @impl true
-  def exchange_name, do: "Bitstamp"
-
-  @impl true
-  def server_host, do: 'ws.bitstamp.net'
-
-  @impl true
-  def server_port, do: 443
+  Client.defclient exchange_name: "Bitstamp",
+                   host: 'ws.bitstamp.net',
+                   port: 443,
+                   currency_pairs: ["btceur", "etheur", "btcusd", "ethusd"]
 
   @impl true
   def handle_ws_message(%{"event" => "trade"}=msg, state) do
