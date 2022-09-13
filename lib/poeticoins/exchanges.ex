@@ -1,6 +1,21 @@
 defmodule Poeticoins.Exchanges do
 
-  alias Poeticoins.{Product, Trade}
+  alias Poeticoins.{Exchanges, Product, Trade}
+
+  @clients [
+    Exchanges.CoinbaseClient,
+    Exchanges.BitstampClient
+  ]
+
+  @available_products (for client <- @clients, pair <- client.available_currency_pairs() do
+    Product.new(client.exchange_name(), pair)
+  end)
+
+  @spec clients :: [module()]
+  def clients, do: @clients
+
+  @spec available_products :: nil | [Product.t()]
+  def available_products(), do: @available_products
 
   @spec subscribe(Product.t()) :: :ok | {:error, term()}
   def subscribe(product) do
