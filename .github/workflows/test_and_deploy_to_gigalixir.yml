@@ -20,7 +20,7 @@ jobs:
         node-version: 14.15.0
 
     - name: Install Deps
-      run: 
+      run: |
         mix deps.get
         npm install --prefix assets
     - run: mix test 
