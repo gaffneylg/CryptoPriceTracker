@@ -3,11 +3,11 @@ on: push
 
 jobs: 
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     strategy: 
       matrix:
-        otp: [24.1]
-        elixir: [1.12]
+        otp: [25.0]
+        elixir: [1.13]
     steps: 
     - uses: actions/checkout@v2
     - uses: actions/setup-elixir@v1
@@ -17,7 +17,7 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v1
       with: 
-        node-version: 14.15.0
+        node-version: 16.17.0
 
     - name: Install Deps
       run: |
