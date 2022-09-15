@@ -1,0 +1,19 @@
+{
+  "name": "assets",
+  "version": "1.0.0",
+  "description": "Phoenix crypto tracker",
+  "main": "index.js",
+  "scripts": {
+    "test": "mix test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaffneylg/CryptoPriceTracker.git"
+  },
+  "author": "Liam Gaffney",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gaffneylg/CryptoPriceTracker/issues"
+  },
+  "homepage": "https://github.com/gaffneylg/CryptoPriceTracker#readme"
+}
