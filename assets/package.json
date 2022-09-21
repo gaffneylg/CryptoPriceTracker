@@ -4,6 +4,7 @@
   "description": "Phoenix crypto tracker",
   "main": "index.js",
   "scripts": {
+    "deploy": "cd .. && mix assets.deploy && rm -f _build/esbuild",
     "test": "mix test"
   },
   "repository": {
