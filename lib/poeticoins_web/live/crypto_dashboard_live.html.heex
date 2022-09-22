@@ -1,3 +1,20 @@
+<form action="#" phx-submit="add-product">
+  <select name="product_id">
+    <option selected disabled>Add a Crypto Product</option>
+    <%= for product <- Poeticoins.available_products() do %>
+      <option value="<%= to_string(product) %>">
+        <%= product.exchange_name %> - <%= product.currency_pair %>
+      </option>
+    <% end %>
+  </select>
+
+  <button type="submit" phx-disable-with="Loading...">Add Product</button>
+</form>
+
+<form action="#" phx-change="filter-products">
+  <input phx-debounce="300" type="text" name="search">
+</form>
+
 <table>
   <thead>
     <th>Traded at</th>
