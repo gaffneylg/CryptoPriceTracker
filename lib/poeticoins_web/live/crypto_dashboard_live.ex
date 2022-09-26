@@ -34,30 +34,31 @@ defmodule PoeticoinsWeb.CryptoDashboardLive do
         <button type="submit" phx-disable-with="Loading...">Add Product</button>
       </form>
 
-      <form action="#" phx-change="filter-products">
-        <input phx-debounce="300" type="text" name="search">
-      </form>
+      <%= for product <- @products, trade = @trades[product], not is_nil(trade) do %>
+        <div class="product-component">
+          <div class="currency-container">
+            <div class="crypto-name">
+              <%= product.currency_pair %>
+            </div>
+          </div>
 
-      <table>
-        <thead>
-          <th>Traded at</th>
-          <th>Exchange</th>
-          <th>Currency</th>
-          <th>Price</th>
-          <th>Volume</th>
-        </thead>
-        <tbody>
-          <%= for product <- @products, trade = @trades[product] do %>
-            <tr>
-              <td><%= trade.traded_at %></td>
-              <td><%= trade.product.exchange_name %></td>
-              <td><%= trade.product.currency_pair %></td>
-              <td><%= trade.price %></td>
-              <td><%= trade.volume %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+          <div class="price-container">
+            <div class="price">
+              <%= trade.price %>
+            </div>
+          </div>
+
+          <div class="exchange-name">
+            <%= product.exchange_name %>
+          </div>
+
+          <div class="trade-time">
+            <%= trade.traded_at %>
+          </div>
+
+        </div>
+      <% end %>
+
 
     """
   end
@@ -72,6 +73,10 @@ defmodule PoeticoinsWeb.CryptoDashboardLive do
     [exchange, currency_pair] = String.split(product_id, ":")
     product = Product.new(exchange, currency_pair)
     socket = add_product_check(socket, product)
+    {:noreply, socket}
+  end
+
+  def handle_event("add-product", %{} = _params, socket) do
     {:noreply, socket}
   end
 
