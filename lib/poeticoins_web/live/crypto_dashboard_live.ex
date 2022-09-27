@@ -8,70 +8,70 @@ defmodule PoeticoinsWeb.CryptoDashboardLive do
     {:ok, socket}
   end
 
-  def render(assigns) do
-    ~L"""
-    <div class="poeticoins-toolbar">
-      <div class="title">Crypto Tracker</div>
+  # def render(assigns) do
+  #   ~L"""
+  #   <div class="poeticoins-toolbar">
+  #     <div class="title">Crypto Tracker</div>
 
-      <form action="#" phx-submit="add-product">
-        <select name="product_id" class="select-product">
+  #     <form action="#" phx-submit="add-product">
+  #       <select name="product_id" class="select-product">
 
-          <option selected disabled>Add a Crypto Product</option>
+  #         <option selected disabled>Add a Crypto Product</option>
 
-          <%= for {exchange_name, products} <- group_products_by_exchange() do %>
-            <optgroup label="<%= exchange_name %>">
-              <%= for product <- products do %>
-                <option value="<%= to_string(product) %>">
-                  <%= crypto_name(product) %>
-                  -
-                  <%= currency_char(product) %>
-                </option>
-              <% end %>
-            </optgroup>
-          <% end %>
-        </select>
+  #         <%= for {exchange_name, products} <- group_products_by_exchange() do %>
+  #           <optgroup label="<%= exchange_name %>">
+  #             <%= for product <- products do %>
+  #               <option value="<%= to_string(product) %>">
+  #                 <%= crypto_name(product) %>
+  #                 -
+  #                 <%= currency_char(product) %>
+  #               </option>
+  #             <% end %>
+  #           </optgroup>
+  #         <% end %>
+  #       </select>
 
-        <button type="submit" phx-disable-with="Loading...">+</button>
-      </form>
-    </div>
+  #       <button type="submit" phx-disable-with="Loading...">+</button>
+  #     </form>
+  #   </div>
 
-    <div class="product-components">
-      <%= for product <- @products, trade = @trades[product], not is_nil(trade) do %>
-        <div class="product-component">
-          <div class="currency-container">
-            <img class="icon" src="<%= crypto_icon(@socket, product) %>" />
-            <div class="crypto-name">
-              <%= crypto_name(product) %>
-            </div>
-          </div>
+  #   <div class="product-components">
+  #     <%= for product <- @products, trade = @trades[product], not is_nil(trade) do %>
+  #       <div class="product-component">
+  #         <div class="currency-container">
+  #           <img class="icon" src="<%= crypto_icon(@socket, product) %>" />
+  #           <div class="crypto-name">
+  #             <%= crypto_name(product) %>
+  #           </div>
+  #         </div>
 
-          <div class="price-container">
-            <ul class="currency-symbols">
-              <%= for curr <- currency_icons() do %>
-                <li class="<%= if currency_symbol(product) == curr, do: "active" %>">
-                  <%= curr %>
-                </li>
-              <% end %>
-            </ul>
+  #         <div class="price-container">
+  #           <ul class="currency-symbols">
+  #             <%= for curr <- currency_icons() do %>
+  #               <li class="<%= if currency_symbol(product) == curr, do: "active" %>">
+  #                 <%= curr %>
+  #               </li>
+  #             <% end %>
+  #           </ul>
 
-            <div class="price">
-              <%= currency_char(product) %>
-              <%= trade.price %>
-            </div>
-          </div>
+  #           <div class="price">
+  #             <%= currency_char(product) %>
+  #             <%= trade.price %>
+  #           </div>
+  #         </div>
 
-          <div class="exchange-name">
-            <%= product.exchange_name %>
-          </div>
+  #         <div class="exchange-name">
+  #           <%= product.exchange_name %>
+  #         </div>
 
-          <div class="trade-time">
-            <%= human_datetime(trade.traded_at) %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-    """
-  end
+  #         <div class="trade-time">
+  #           <%= human_datetime(trade.traded_at) %>
+  #         </div>
+  #       </div>
+  #     <% end %>
+  #   </div>
+  #   """
+  # end
 
   def handle_info({:new_trade, trade}, socket) do
     socket = update(socket, :trades, &Map.put(&1, trade.product, trade))
