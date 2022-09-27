@@ -6,7 +6,7 @@ defmodule Poeticoins.Exchanges.CoinbaseClient do
   Client.defclient exchange_name: "Coinbase",
                    host: 'ws-feed.pro.coinbase.com',
                    port: 443,
-                   currency_pairs: ["BTC-EUR", "ETH-EUR", "BTC-USD", "ETC-USD"]
+                   currency_pairs: ["BTC-EUR", "ETH-EUR", "BTC-USD", "ETH-USD"]
 
   @impl true
   def handle_ws_message(%{"type" => "ticker"}=msg, state) do

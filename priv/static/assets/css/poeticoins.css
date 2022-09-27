@@ -116,11 +116,11 @@ body {
   top: 10%;
   right: 15px;
 }
-.product-component .price-container ul.fiat-symbols {
+.product-component .price-container ul.currency-symbols {
   text-align: right;
   margin: 0px;
 }
-.product-component .price-container ul.fiat-symbols li {
+.product-component .price-container ul.currency-symbols li {
   text-transform: uppercase;
   color: #616a8b;
   display: inline-block;
@@ -128,7 +128,7 @@ body {
   margin-left: 3px;
   font-weight: 400;
 }
-.product-component .price-container ul.fiat-symbols li.active {
+.product-component .price-container ul.currency-symbols li.active {
   color: white;
 }
 .product-component .price-container .price {
