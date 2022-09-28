@@ -37,7 +37,7 @@ defmodule PoeticoinsWeb.CryptoDashboardLive do
       </form>
     </div>
 
-    <div class="product-components">
+    <div class="product-components-container">
       <%= for product <- @products do %>
         <%= live_component(PoeticoinsWeb.ProductComponent,
               id: product, timezone: @timezone) %>
