@@ -6,7 +6,9 @@ defmodule PoeticoinsWeb.ProductHelpers do
     ["eur", "usd"]
   end
 
-  def human_datetime(datetime) do
+  def human_datetime(datetime, timezone \\ "UTC") do
+    datetime
+    |> DateTime.shift_zone!(timezone)
     Calendar.strftime(datetime, "%b %d %Y, %H:%M:%S")
   end
 

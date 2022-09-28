@@ -4,7 +4,9 @@ defmodule PoeticoinsWeb.CryptoDashboardLive do
   import PoeticoinsWeb.ProductHelpers
 
   def mount(_params, _session, socket) do
-    socket = assign(socket, products: [])
+    socket = assign(socket,
+     products: [],
+     timezone: get_timezone_from_conn(socket))
     {:ok, socket}
   end
 
@@ -37,7 +39,8 @@ defmodule PoeticoinsWeb.CryptoDashboardLive do
 
     <div class="product-components">
       <%= for product <- @products do %>
-        <%= live_component(PoeticoinsWeb.ProductComponent, id: product) %>
+        <%= live_component(PoeticoinsWeb.ProductComponent,
+              id: product, timezone: @timezone) %>
       <% end %>
     </div>
     """
@@ -97,5 +100,12 @@ defmodule PoeticoinsWeb.CryptoDashboardLive do
     Poeticoins.subscribe_to_trades(product)
     socket
     |> update(:products, & &1 ++ [product])
+  end
+
+  defp get_timezone_from_conn(socket) do
+    case get_connect_params(socket) do
+      %{"timezone" => timezone} when not is_nil(timezone) -> timezone
+      _ -> "UTC"
+    end
   end
 end
