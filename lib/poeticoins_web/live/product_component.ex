@@ -49,6 +49,16 @@ defmodule PoeticoinsWeb.ProductComponent do
           </div>
         </div>
 
+        <div class="chart-component">
+          <div phx-hook="Chart"
+              id={"product-chart-#{to_string(@product)}"}
+              data-price={"#{@trade.price}"}
+              data-traded-at={"#{ DateTime.to_unix(@trade.traded_at, :milliseconds) }"}
+              phx-update="ignore">
+            <div class="chart-container"></div>
+          </div>
+        </div>
+
         <div class="exchange-name">
           <%= @product.exchange_name %>
         </div>
