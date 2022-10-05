@@ -36,3 +36,6 @@ npm-debug.log
 .DS_Store
 lib/.DS_Store
 
+# Ignore priv/static/assets generated files
+priv/static/assets/app.css
+priv/static/assets/app.js

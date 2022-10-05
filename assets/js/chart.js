@@ -1,14 +1,19 @@
-// import _css from 'uplot/dist/uPlot.min.css'
+import _css from 'uplot/dist/uPlot.min.css'
 import uPlot from "uplot"
 
 let ChartHook = {
   mounted() {
+    let product_id = this.el.product_id,
+      event = `new-trade:${product_id}`,
+      self = this;
+
     this.trades = [];
     this.plot = new uPlot(plotOptions(), [[], []], this.el);
+    this.handleEvent(event, (payload) => self.handleNewTrade(payload))
   },
-  updated() {
-    let price = parseFloat(this.el.dataset.price),
-      timestamp = parseInt(this.el.dataset.tradedAt)
+  handleNewTrade(trade) {
+    let price = parseFloat(trade.price),
+      timestamp = trade.tradedAt;
 
     this.trades.push({
       timestamp: timestamp, price: price
